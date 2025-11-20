@@ -36,8 +36,6 @@ class _DataFormState extends State<DataForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
-          
           _buildInput(
             child: TextFormField(
               controller: _age,
@@ -49,7 +47,10 @@ class _DataFormState extends State<DataForm> {
               ),
               keyboardType: TextInputType.number,
               validator: (value) {
-                if (value == null || value.isEmpty) return 'Please enter your age';
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your age';
+                }
+
                 final age = int.tryParse(value);
                 if (age == null || age <= 0) return 'Please enter a valid age';
                 return null;
@@ -57,7 +58,6 @@ class _DataFormState extends State<DataForm> {
             ),
           ),
 
-          
           _buildInput(
             child: TextFormField(
               controller: _weight,
@@ -69,7 +69,10 @@ class _DataFormState extends State<DataForm> {
               ),
               keyboardType: TextInputType.number,
               validator: (value) {
-                if (value == null || value.isEmpty) return 'Please enter your weight';
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your weight';
+                }
+
                 final w = double.tryParse(value);
                 if (w == null || w <= 0) return 'Please enter a valid weight';
                 return null;
@@ -77,7 +80,6 @@ class _DataFormState extends State<DataForm> {
             ),
           ),
 
-          
           _buildInput(
             child: TextFormField(
               controller: _height,
@@ -89,7 +91,10 @@ class _DataFormState extends State<DataForm> {
               ),
               keyboardType: TextInputType.number,
               validator: (value) {
-                if (value == null || value.isEmpty) return 'Please enter your height';
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your height';
+                }
+
                 final h = double.tryParse(value);
                 if (h == null || h <= 0) return 'Please enter a valid height';
                 return null;
@@ -97,13 +102,17 @@ class _DataFormState extends State<DataForm> {
             ),
           ),
 
-          
           _buildInput(
             child: DropdownButtonFormField<String>(
               initialValue: _selectedSex,
               dropdownColor: theme.scaffoldBackgroundColor,
               decoration: InputDecoration(
-                label: Text('Sex', softWrap: true, overflow: TextOverflow.visible, style: theme.textTheme.bodyMedium,),
+                label: Text(
+                  'Sex',
+                  softWrap: true,
+                  overflow: TextOverflow.visible,
+                  style: theme.textTheme.bodyMedium,
+                ),
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
@@ -123,17 +132,20 @@ class _DataFormState extends State<DataForm> {
             ),
           ),
 
-         
           _buildInput(
             child: DropdownButtonFormField<String>(
               initialValue: _selectedActivity,
               dropdownColor: theme.scaffoldBackgroundColor,
               decoration: InputDecoration(
-                label: Text('Activity Level', softWrap: true, overflow: TextOverflow.visible, style: theme.textTheme.bodyMedium,),
+                label: Text(
+                  'Activity Level',
+                  softWrap: true,
+                  overflow: TextOverflow.visible,
+                  style: theme.textTheme.bodyMedium,
+                ),
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
-              
               ),
               items: Db.activityLevels.map((value) {
                 return DropdownMenuItem(
@@ -149,13 +161,17 @@ class _DataFormState extends State<DataForm> {
             ),
           ),
 
-          
           _buildInput(
             child: DropdownButtonFormField<String>(
               initialValue: _selectedGoal,
               dropdownColor: theme.scaffoldBackgroundColor,
               decoration: InputDecoration(
-                label: Text('Goal', softWrap: true, overflow: TextOverflow.visible, style: theme.textTheme.bodyMedium,),
+                label: Text(
+                  'Goal',
+                  softWrap: true,
+                  overflow: TextOverflow.visible,
+                  style: theme.textTheme.bodyMedium,
+                ),
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
@@ -175,7 +191,6 @@ class _DataFormState extends State<DataForm> {
             ),
           ),
 
-          
           _buildInput(
             child: SizedBox(
               width: double.infinity,
@@ -191,7 +206,8 @@ class _DataFormState extends State<DataForm> {
                 child: Text(
                   'Submit',
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: Colors.black, fontSize: 18,
+                    color: Colors.black,
+                    fontSize: 18,
                   ),
                 ),
               ),
@@ -203,10 +219,6 @@ class _DataFormState extends State<DataForm> {
   }
 
   Widget _buildInput({required Widget child}) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 18.0),
-      child: child,
-    );
+    return Padding(padding: const EdgeInsets.only(bottom: 18.0), child: child);
   }
 }
-

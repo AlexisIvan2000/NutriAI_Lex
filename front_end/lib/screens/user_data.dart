@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/widgets/data_form.dart';
+import 'package:front_end/screens/dashboard.dart';
 
 class UserDataScreen extends StatelessWidget {
   const UserDataScreen({super.key});
@@ -20,7 +21,15 @@ class UserDataScreen extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DashboardScreen(),
+                  ),
+                  (route) => false,
+                );
+              },
               icon: Icon(
                 Icons.arrow_forward,
                 size: 20,
