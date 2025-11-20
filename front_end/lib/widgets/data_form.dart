@@ -36,6 +36,8 @@ class _DataFormState extends State<DataForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
+          
           _buildInput(
             child: TextFormField(
               controller: _age,
@@ -47,18 +49,15 @@ class _DataFormState extends State<DataForm> {
               ),
               keyboardType: TextInputType.number,
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your age';
-                }
+                if (value == null || value.isEmpty) return 'Please enter your age';
                 final age = int.tryParse(value);
-                if (age == null || age <= 0) {
-                  return 'Please enter a valid age';
-                }
+                if (age == null || age <= 0) return 'Please enter a valid age';
                 return null;
               },
             ),
           ),
-    
+
+          
           _buildInput(
             child: TextFormField(
               controller: _weight,
@@ -70,18 +69,15 @@ class _DataFormState extends State<DataForm> {
               ),
               keyboardType: TextInputType.number,
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your weight';
-                }
+                if (value == null || value.isEmpty) return 'Please enter your weight';
                 final w = double.tryParse(value);
-                if (w == null || w <= 0) {
-                  return 'Please enter a valid weight';
-                }
+                if (w == null || w <= 0) return 'Please enter a valid weight';
                 return null;
               },
             ),
           ),
-    
+
+          
           _buildInput(
             child: TextFormField(
               controller: _height,
@@ -93,24 +89,21 @@ class _DataFormState extends State<DataForm> {
               ),
               keyboardType: TextInputType.number,
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your height';
-                }
+                if (value == null || value.isEmpty) return 'Please enter your height';
                 final h = double.tryParse(value);
-                if (h == null || h <= 0) {
-                  return 'Please enter a valid height';
-                }
+                if (h == null || h <= 0) return 'Please enter a valid height';
                 return null;
               },
             ),
           ),
-    
+
+          
           _buildInput(
             child: DropdownButtonFormField<String>(
-              dropdownColor: theme.scaffoldBackgroundColor,                        
               initialValue: _selectedSex,
+              dropdownColor: theme.scaffoldBackgroundColor,
               decoration: InputDecoration(
-                labelText: 'Sex',
+                label: Text('Sex', softWrap: true, overflow: TextOverflow.visible, style: theme.textTheme.bodyMedium,),
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
@@ -119,64 +112,50 @@ class _DataFormState extends State<DataForm> {
               items: Db.sex.map((value) {
                 return DropdownMenuItem(
                   value: value,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    child: Text(
-                      value,
-                      style: theme.textTheme.bodyMedium,
-                      softWrap: true,
-                      overflow: TextOverflow.visible,
-                    ),
+                  child: Text(
+                    value,
+                    style: theme.textTheme.bodyMedium,
+                    softWrap: true,
                   ),
                 );
               }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  _selectedSex = value;
-                });
-              },
+              onChanged: (value) => setState(() => _selectedSex = value),
             ),
           ),
-    
+
+         
           _buildInput(
             child: DropdownButtonFormField<String>(
-              dropdownColor: theme.scaffoldBackgroundColor, 
               initialValue: _selectedActivity,
+              dropdownColor: theme.scaffoldBackgroundColor,
               decoration: InputDecoration(
-                labelText: 'Activity Level',
+                label: Text('Activity Level', softWrap: true, overflow: TextOverflow.visible, style: theme.textTheme.bodyMedium,),
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
-                labelStyle: theme.textTheme.bodyMedium,
+              
               ),
               items: Db.activityLevels.map((value) {
                 return DropdownMenuItem(
                   value: value,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    child: Text(
-                      value,
-                      style: theme.textTheme.bodyMedium,
-                      softWrap: true,
-                      overflow: TextOverflow.visible,
-                    ),
+                  child: Text(
+                    value,
+                    style: theme.textTheme.bodyMedium,
+                    softWrap: true,
                   ),
                 );
               }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  _selectedActivity = value;
-                });
-              },
+              onChanged: (value) => setState(() => _selectedActivity = value),
             ),
           ),
-    
+
+          
           _buildInput(
             child: DropdownButtonFormField<String>(
-              dropdownColor: theme.scaffoldBackgroundColor, 
               initialValue: _selectedGoal,
+              dropdownColor: theme.scaffoldBackgroundColor,
               decoration: InputDecoration(
-                labelText: 'Goal',
+                label: Text('Goal', softWrap: true, overflow: TextOverflow.visible, style: theme.textTheme.bodyMedium,),
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
@@ -185,53 +164,38 @@ class _DataFormState extends State<DataForm> {
               items: Db.goals.map((value) {
                 return DropdownMenuItem(
                   value: value,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    child: Text(
-                      value,
-                      style: theme.textTheme.bodyMedium,
-                      softWrap: true,
-                      overflow: TextOverflow.visible,
-                    ),
+                  child: Text(
+                    value,
+                    style: theme.textTheme.bodyMedium,
+                    softWrap: true,
                   ),
                 );
               }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedGoal = value;
-                  });
-                },
-              ),
-            ),
-      
-            _buildInput(
-              child: SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: ElevatedButton(
-              onPressed: () {
-                // if (_formKey.currentState!.validate()) {
-                //   // Process data
-                // }
-                  
-              },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                backgroundColor: Theme.of(
-                  context,
-                ).colorScheme.secondary.withAlpha(31),
-              ),
-              child: Text(
-                'Submit',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Colors.black,
-                  fontSize: 18,
-                ),
-              ),
+              onChanged: (value) => setState(() => _selectedGoal = value),
             ),
           ),
+
+          
+          _buildInput(
+            child: SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  backgroundColor: theme.colorScheme.secondary.withAlpha(31),
+                ),
+                child: Text(
+                  'Submit',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: Colors.black, fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -239,6 +203,10 @@ class _DataFormState extends State<DataForm> {
   }
 
   Widget _buildInput({required Widget child}) {
-    return Padding(padding: const EdgeInsets.only(bottom: 18), child: child);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 18.0),
+      child: child,
+    );
   }
 }
+

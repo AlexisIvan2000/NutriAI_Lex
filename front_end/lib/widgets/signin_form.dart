@@ -107,10 +107,11 @@ class _SigninFormState extends State<SigninForm> {
                 // if (_formKey.currentState!.validate()) {
                 //   // Process data
                 // }
-                  Navigator.of(context).push(
+                  Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
                     builder: (context) => const UserDataScreen(),
                   ),
+                  (route) => false,
                 );
               },
               style: ElevatedButton.styleFrom(

@@ -4,15 +4,45 @@ class Db {
     'Female',
   ];
   static const List<String> activityLevels = [
-    'Sedentary (little or no exercise)',
-    'Lightly active (light exercise/sports 1-3 days/week)',
-    'Moderately active (moderate exercise/sports 3-5 days/week)',
-    'Very active (hard exercise/sports 6-7 days a week)',
-    'Super active (very hard exercise/sports & physical job or 2x training)',
+    'Sedentary',
+    'Lightly active',
+    'Moderately active',
+    'Very active',
   ];
   static const List<String> goals = [
     'Lose Fat',
     'Maintain Weight',
     'Mass Gain',
+  ];
+  static const List<String> allergies = [
+    'Peanuts',
+    'Tree Nuts',
+    'Sesame',
+    'Milk',
+    'Eggs',
+    'Fish',
+    'Crustaceans and molluscs',
+    'Soy',
+    'Wheat/Gluten',
+    'Mustard',
+    'Celery',
+    'Corn',
+    'Legumes',
+    'Avocado and banana',
+    'Sulfites',
+    'Lupin',
+    'Poppy seeds',
+  ];
+  static const List<String> diets = [
+    'Vegetarian',
+    'Vegan',
+    'Pescatarian',
+    'Keto',
+    'Paleo',
+    'Low Carb',
+    'Gluten Free',
+    'Dairy Free',
+    'Protein Rich',
+    'Low Fat',
   ];
 }
