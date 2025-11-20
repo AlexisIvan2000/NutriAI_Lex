@@ -11,7 +11,10 @@ class _AccountSettingState extends State<AccountSetting> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Theme.of(context).colorScheme.surfaceContainerHigh,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -23,7 +26,7 @@ class _AccountSettingState extends State<AccountSetting> {
                 Text('First Name',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text('John',
+                Text('Alexis',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -37,7 +40,7 @@ class _AccountSettingState extends State<AccountSetting> {
                 Text('Last Name',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text('John',
+                Text('Ivan',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -51,7 +54,7 @@ class _AccountSettingState extends State<AccountSetting> {
                 Text('Email',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text('John@gmail.com',
+                Text('Alexis@gmail.com',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -72,7 +75,7 @@ class _AccountSettingState extends State<AccountSetting> {
                 ),
               ],              
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -80,13 +83,13 @@ class _AccountSettingState extends State<AccountSetting> {
                   onPressed: () {
                     // Handle edit action
                   },
-                  child: const Text('Edit'),
+                  child: const Text('Edit Info'),
                 ),
                 TextButton(
                   onPressed: () {
                     // Handle change password action
                   },
-                  child: const Text('Delete'),
+                  child: const Text('Delete Account'),
                 ),
               ],
             )
