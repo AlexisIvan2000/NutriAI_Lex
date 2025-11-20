@@ -13,11 +13,19 @@ class UserDataScreen  extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Enter your data',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w400,
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('assets/images/logo.png'),
+              ),
+              const SizedBox(height: 24.0),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Please enter your personal data',
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
               const SizedBox(height: 24.0),
