@@ -45,4 +45,13 @@ class Db {
     'Protein Rich',
     'Low Fat',
   ];
+  static const List<String> themes = [
+    'Light',
+    'Dark',
+    'System Default',
+  ];
+  static const List<String> languages = [
+    'English', 
+    'French',   
+  ];
 }

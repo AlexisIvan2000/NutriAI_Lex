@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/widgets/dashboard/account_setting.dart';
+import 'package:front_end/widgets/dashboard/app_setting.dart';
 import 'package:front_end/widgets/dashboard/navigation.dart';
 import 'package:front_end/widgets/dashboard/social_networks.dart';
 
@@ -31,6 +32,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               const SizedBox(height: 10),
               const AccountSetting(),
+              const SizedBox(height: 20),
+              Text(
+                'APP SETTINGS',
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const AppSetting(),
               const SizedBox(height: 10),
               Text(
                 'SOCIAL NETWORKS',
