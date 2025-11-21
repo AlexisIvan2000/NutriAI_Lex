@@ -83,13 +83,13 @@ class _AccountSettingState extends State<AccountSetting> {
                   onPressed: () {
                     // Handle edit action
                   },
-                  child: const Text('Edit'),
+                  child: const Text('Edit Info'),
                 ),
                 TextButton(
                   onPressed: () {
                     // Handle change password action
                   },
-                  child: const Text('Delete'),
+                  child: const Text('Delete Account'),
                 ),
               ],
             )
