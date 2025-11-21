@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AccountSetting extends StatefulWidget {
-  const AccountSetting({super.key});
+class CaloriesMacros extends StatefulWidget {
+  const CaloriesMacros({super.key});
 
   @override
-  State<AccountSetting> createState() => _AccountSettingState();
+  State<CaloriesMacros> createState() => _CaloriesMacrosState();
 }
 
-class _AccountSettingState extends State<AccountSetting> {
+class _CaloriesMacrosState extends State<CaloriesMacros> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,10 +23,10 @@ class _AccountSettingState extends State<AccountSetting> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('First Name',
+                Text('Daily Calorie Intake',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text('Alexis',
+                Text('2500 kcal',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -37,10 +37,10 @@ class _AccountSettingState extends State<AccountSetting> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Last Name',
+                Text('Protein',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text('Ivan',
+                Text('150 g',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -51,10 +51,10 @@ class _AccountSettingState extends State<AccountSetting> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Email',
+                Text('Carbs',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text('Alexis@gmail.com',
+                Text('300 g',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -65,10 +65,10 @@ class _AccountSettingState extends State<AccountSetting> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Password',
+                Text('Fat',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text('********',
+                Text('70 g',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -77,28 +77,17 @@ class _AccountSettingState extends State<AccountSetting> {
             ),
             const SizedBox(height: 12),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: () {
-                    // Handle edit action
-                  },
-                  child: const Text('Edit'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    // Handle change password action
-                  },
-                  child: const Text('Delete'),
+                  onPressed: () {}, 
+                  child: const Text('Adjust'),
                 ),
               ],
-            )
-            
-           
+            ),
           ],
         ),
       ),
-     
     );
   }
 }

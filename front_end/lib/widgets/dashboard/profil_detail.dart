@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AccountSetting extends StatefulWidget {
-  const AccountSetting({super.key});
+class ProfilDetail extends StatefulWidget {
+  const ProfilDetail({super.key});
 
   @override
-  State<AccountSetting> createState() => _AccountSettingState();
+  State<ProfilDetail> createState() => _ProfilDetailState();
 }
 
-class _AccountSettingState extends State<AccountSetting> {
+class _ProfilDetailState extends State<ProfilDetail> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,10 +23,10 @@ class _AccountSettingState extends State<AccountSetting> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('First Name',
+                Text('Age',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text('Alexis',
+                Text('25 years',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -37,10 +37,10 @@ class _AccountSettingState extends State<AccountSetting> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Last Name',
+                Text('Current Weight',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text('Ivan',
+                Text('220 lbs',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -51,10 +51,10 @@ class _AccountSettingState extends State<AccountSetting> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Email',
+                Text('Height',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text('Alexis@gmail.com',
+                Text('6 ft 2 in',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -65,10 +65,10 @@ class _AccountSettingState extends State<AccountSetting> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Password',
+                Text('Sex',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                Text('********',
+                Text('Male',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -78,27 +78,47 @@ class _AccountSettingState extends State<AccountSetting> {
             const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Activity Level',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                Text('Moderately active',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],              
+            ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Goal',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                Text('Lose Fat',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],              
+            ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
                   onPressed: () {
-                    // Handle edit action
-                  },
+                    // Implement edit functionality here
+                  }, 
                   child: const Text('Edit'),
                 ),
-                TextButton(
-                  onPressed: () {
-                    // Handle change password action
-                  },
-                  child: const Text('Delete'),
-                ),
               ],
-            )
-            
-           
+            ),
+
           ],
         ),
       ),
-     
     );
   }
 }

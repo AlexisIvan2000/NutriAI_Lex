@@ -53,7 +53,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 50.0,
+                      horizontal: 40.0,
                       vertical: 12.0,
                     ),
                   ),

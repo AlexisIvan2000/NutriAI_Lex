@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/screens/dashboard.dart';
 import 'package:front_end/screens/favorites.dart';
+import 'package:front_end/screens/profile.dart';
 import 'package:front_end/screens/settings.dart';
-
 
 class NavigateBar extends StatefulWidget {
   const NavigateBar({super.key});
@@ -11,7 +11,7 @@ class NavigateBar extends StatefulWidget {
   State<NavigateBar> createState() => _NavigateBarState();
 }
 
-class  _NavigateBarState extends State<NavigateBar> {
+class _NavigateBarState extends State<NavigateBar> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -19,21 +19,24 @@ class  _NavigateBarState extends State<NavigateBar> {
       _selectedIndex = index;
       if (_selectedIndex == 0) {
         Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const DashboardScreen()),
-        (Route<dynamic> route) => false,
-      );
+          MaterialPageRoute(builder: (_) => const DashboardScreen()),
+          (Route<dynamic> route) => false,
+        );
       } else if (_selectedIndex == 1) {
         Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const FavoritesScreen()),
-        (Route<dynamic> route) => false,
-      );
+          MaterialPageRoute(builder: (_) => const FavoritesScreen()),
+          (Route<dynamic> route) => false,
+        );
       } else if (_selectedIndex == 2) {
-       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const SettingsScreen()),
-        (Route<dynamic> route) => false,
-      );
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (_) => const SettingsScreen()),
+          (Route<dynamic> route) => false,
+        );
       } else if (_selectedIndex == 3) {
-        // Navigate to Profile
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (_) => const ProfileScreen()),
+          (Route<dynamic> route) => false,
+        );
       }
     });
   }
@@ -47,22 +50,10 @@ class  _NavigateBarState extends State<NavigateBar> {
       type: BottomNavigationBarType.fixed,
       onTap: _onItemTapped,
       items: [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_filled),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.star),
-          label: 'Favorites',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: 'Settings',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favorites'),
+        BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
       ],
     );
   }
