@@ -1,0 +1,4 @@
+Python 
+Uvicorn
+Sqlalchemy 
+Alembic
