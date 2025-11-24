@@ -2,3 +2,5 @@ Python
 Uvicorn
 Sqlalchemy 
 Alembic
+Pytest
+FastAPI

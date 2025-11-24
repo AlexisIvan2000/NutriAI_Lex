@@ -3,6 +3,7 @@
 *.env
 config.pyc
 
+.pytest_cache/
 __pycache__/
 *.pyc
 *.pyo
