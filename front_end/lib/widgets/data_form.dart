@@ -108,7 +108,7 @@ class _DataFormState extends State<DataForm> {
               dropdownColor: theme.scaffoldBackgroundColor,
               decoration: InputDecoration(
                 label: Text(
-                  'Sex',
+                  'Gender',
                   softWrap: true,
                   overflow: TextOverflow.visible,
                   style: theme.textTheme.bodyMedium,
