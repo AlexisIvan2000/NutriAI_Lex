@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException, Request
 from fastapi.responses import RedirectResponse, HTMLResponse
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
+from sqlalchemy import select
 from db.database import get_db
 from db.models import User
 from services.jwt_handler import create_access_token
