@@ -1,10 +1,11 @@
 from fastapi import FastAPI
-from routes import router as auth_route
-from db.database import Base, engine
+from routes.auth_route import router as auth_route
+from routes.oauth_route import router as oauth_route
 
 app = FastAPI()
-Base.metadata.create_all(bind=engine)
+
 app.include_router(auth_route)
+app.include_router(oauth_route)
 
 @app.get("/")
 async def root():
@@ -12,4 +13,4 @@ async def root():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

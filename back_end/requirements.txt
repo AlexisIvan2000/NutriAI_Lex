@@ -1,6 +1,7 @@
-Python 
 Uvicorn
 Sqlalchemy 
 Alembic
 Pytest
 FastAPI
+Passlib[argon2]
+Asyncpg
