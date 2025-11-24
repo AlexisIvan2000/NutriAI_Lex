@@ -138,7 +138,7 @@ class _DataFormState extends State<DataForm> {
               dropdownColor: theme.scaffoldBackgroundColor,
               decoration: InputDecoration(
                 label: Text(
-                  'Activity Level',
+                  'Activity Level',                                                                                                                         
                   softWrap: true,
                   overflow: TextOverflow.visible,
                   style: theme.textTheme.bodyMedium,

@@ -40,6 +40,7 @@ class _AppSettingState extends State<AppSetting> {
               children: [
                 Text('Language', style: Theme.of(context).textTheme.bodyMedium),
                 DropdownButton(
+                  borderRadius: BorderRadius.circular(8.0),
                   items: Db.languages.map((level) {
                     return DropdownMenuItem(
                       value: level,
@@ -64,6 +65,7 @@ class _AppSettingState extends State<AppSetting> {
               children: [
                 Text('Theme', style: Theme.of(context).textTheme.bodyMedium),
                 DropdownButton(
+                  borderRadius: BorderRadius.circular(8.0),
                   items: Db.themes.map((level) {
                     return DropdownMenuItem(
                       value: level,
