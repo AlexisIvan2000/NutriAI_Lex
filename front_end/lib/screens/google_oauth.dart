@@ -19,8 +19,9 @@ class _GoogleOAuthScreenState extends State<GoogleOAuthScreen> {
     return Scaffold(
       body: InAppWebView(
         initialUrlRequest: URLRequest(
-          url: WebUri('http://10.0.2.2:8000/auth/google/login'),
+          url: WebUri('http://10.0.2.2:8000/auth/google/start'),
         ),
+
         onWebViewCreated: (InAppWebViewController controller) {
           webView = controller;
           controller.addJavaScriptHandler(

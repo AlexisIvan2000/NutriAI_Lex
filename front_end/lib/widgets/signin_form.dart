@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/screens/google_oauth.dart';
 import 'package:front_end/screens/signup.dart';
 import 'package:front_end/screens/user_data.dart';
 import 'package:front_end/services/auth_service.dart';
-import 'package:front_end/screens/google_oauth.dart';
 
 class SigninForm extends StatefulWidget {
   const SigninForm({super.key});
@@ -139,8 +139,7 @@ class _SigninFormState extends State<SigninForm> {
             height: 50,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
+                Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const GoogleOAuthScreen()),
                 );
               },

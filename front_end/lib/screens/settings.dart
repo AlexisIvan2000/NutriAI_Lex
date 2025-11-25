@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/screens/signin.dart';
+import 'package:front_end/services/auth_service.dart';
 import 'package:front_end/widgets/dashboard/account_setting.dart';
 import 'package:front_end/widgets/dashboard/app_setting.dart';
 import 'package:front_end/widgets/dashboard/navigation.dart';
@@ -58,7 +60,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Align(
                 alignment: Alignment.center,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await AuthService.instance.logout();
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (_) => const SigninScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.onSurface.withAlpha(100),
                     shape: RoundedRectangleBorder(
