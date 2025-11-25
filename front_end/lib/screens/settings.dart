@@ -64,11 +64,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     await AuthService.instance.logout();
                     if (context.mounted){
                       Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (_) => const SigninScreen(),
-                      ),
-                      (route) => false,
-                    );
+                        MaterialPageRoute(
+                          builder: (_) => const SigninScreen(),
+                        ),
+                        (route) => false,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Logged out successfully")),
+                      );
                     }
                     
                   },

@@ -3,6 +3,7 @@ import 'package:front_end/screens/google_oauth.dart';
 import 'package:front_end/screens/signup.dart';
 import 'package:front_end/screens/user_data.dart';
 import 'package:front_end/services/auth_service.dart';
+import 'package:front_end/widgets/reset/reset_password_dialog.dart';
 
 class SigninForm extends StatefulWidget {
   const SigninForm({super.key});
@@ -83,8 +84,26 @@ class _SigninFormState extends State<SigninForm> {
               return null;
             },
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {
+                  ResetPasswordDialog.show(context);
+                },
+                child: Text(
+                  'Forgot Password?',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                ),
+              ),
+            ],
+          ),
 
-          const SizedBox(height: 30.0),
+          const SizedBox(height: 16.0),
 
           SizedBox(
             width: double.infinity,
