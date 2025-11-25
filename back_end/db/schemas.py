@@ -27,6 +27,7 @@ class UserBase(BaseModel):
 
 # Personal Details Schemas
 class PersonalDetailsCreate(BaseModel):
+   user_id: int
    age: int
    weight: float
    height: float

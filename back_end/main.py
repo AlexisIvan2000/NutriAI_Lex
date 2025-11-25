@@ -1,11 +1,13 @@
 from fastapi import FastAPI
 from routes.auth_route import router as auth_route
 from routes.oauth_route import router as oauth_route
+from routes.personal_details_route import router as personal_details_route
 
 app = FastAPI()
 
 app.include_router(auth_route)
 app.include_router(oauth_route)
+app.include_router(personal_details_route)
 
 @app.get("/")
 async def root():

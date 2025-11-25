@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/data/db.dart';
+import 'package:front_end/models/datas.dart';
+import 'package:front_end/services/personal_details_api.dart';
+import 'package:front_end/utils/secure_storage.dart';
 
 class DataForm extends StatefulWidget {
   const DataForm({super.key});
@@ -11,9 +14,10 @@ class DataForm extends StatefulWidget {
 class _DataFormState extends State<DataForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final _age = TextEditingController();
-  final _weight = TextEditingController();
-  final _height = TextEditingController();
+  final _ageCtrl = TextEditingController();
+  final _weightLbsCtrl = TextEditingController();
+  final _feetCtrl = TextEditingController();
+  final _inchesCtrl = TextEditingController();
 
   String? _selectedSex;
   String? _selectedActivity;
@@ -21,9 +25,10 @@ class _DataFormState extends State<DataForm> {
 
   @override
   void dispose() {
-    _age.dispose();
-    _weight.dispose();
-    _height.dispose();
+    _ageCtrl.dispose();
+    _weightLbsCtrl.dispose();
+    _feetCtrl.dispose();
+    _inchesCtrl.dispose();
     super.dispose();
   }
 
@@ -34,191 +39,201 @@ class _DataFormState extends State<DataForm> {
     return Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildInput(
-            child: TextFormField(
-              controller: _age,
-              decoration: const InputDecoration(
-                labelText: 'Age',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-              ),
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your age';
-                }
-
-                final age = int.tryParse(value);
-                if (age == null || age <= 0) return 'Please enter a valid age';
-                return null;
-              },
-            ),
-          ),
-
-          _buildInput(
-            child: TextFormField(
-              controller: _weight,
-              decoration: const InputDecoration(
-                labelText: 'Weight (Lbs)',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-              ),
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your weight';
-                }
-
-                final w = double.tryParse(value);
-                if (w == null || w <= 0) return 'Please enter a valid weight';
-                return null;
-              },
-            ),
-          ),
-
-          _buildInput(
-            child: TextFormField(
-              controller: _height,
-              decoration: const InputDecoration(
-                labelText: 'Height (Inches)',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-              ),
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your height';
-                }
-
-                final h = double.tryParse(value);
-                if (h == null || h <= 0) return 'Please enter a valid height';
-                return null;
-              },
-            ),
-          ),
-
-          _buildInput(
-            child: DropdownButtonFormField<String>(
-              initialValue: _selectedSex,
-              dropdownColor: theme.scaffoldBackgroundColor,
-              decoration: InputDecoration(
-                label: Text(
-                  'Gender',
-                  softWrap: true,
-                  overflow: TextOverflow.visible,
-                  style: theme.textTheme.bodyMedium,
-                ),
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                labelStyle: theme.textTheme.bodyMedium,
-              ),
-              items: Db.sex.map((value) {
-                return DropdownMenuItem(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: theme.textTheme.bodyMedium,
-                    softWrap: true,
-                  ),
-                );
-              }).toList(),
-              onChanged: (value) => setState(() => _selectedSex = value),
-            ),
-          ),
-
-          _buildInput(
-            child: DropdownButtonFormField<String>(
-              initialValue: _selectedActivity,
-              dropdownColor: theme.scaffoldBackgroundColor,
-              decoration: InputDecoration(
-                label: Text(
-                  'Activity Level',                                                                                                                         
-                  softWrap: true,
-                  overflow: TextOverflow.visible,
-                  style: theme.textTheme.bodyMedium,
-                ),
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-              ),
-              items: Db.activityLevels.map((value) {
-                return DropdownMenuItem(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: theme.textTheme.bodyMedium,
-                    softWrap: true,
-                  ),
-                );
-              }).toList(),
-              onChanged: (value) => setState(() => _selectedActivity = value),
-            ),
-          ),
-
-          _buildInput(
-            child: DropdownButtonFormField<String>(
-              initialValue: _selectedGoal,
-              dropdownColor: theme.scaffoldBackgroundColor,
-              decoration: InputDecoration(
-                label: Text(
-                  'Goal',
-                  softWrap: true,
-                  overflow: TextOverflow.visible,
-                  style: theme.textTheme.bodyMedium,
-                ),
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
-                labelStyle: theme.textTheme.bodyMedium,
-              ),
-              items: Db.goals.map((value) {
-                return DropdownMenuItem(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: theme.textTheme.bodyMedium,
-                    softWrap: true,
-                  ),
-                );
-              }).toList(),
-              onChanged: (value) => setState(() => _selectedGoal = value),
-            ),
-          ),
-
-          _buildInput(
-            child: SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  backgroundColor: theme.colorScheme.secondary.withAlpha(31),
-                ),
-                child: Text(
-                  'Submit',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: Colors.black,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          _input(_buildAgeField()),
+          _input(_buildWeightField()),
+          _input(_buildHeightFields()), 
+          _input(_buildGenderDropdown(theme)),
+          _input(_buildActivityDropdown(theme)),
+          _input(_buildGoalDropdown(theme)),
+          _input(_buildSubmitButton(theme)),
         ],
       ),
     );
   }
 
-  Widget _buildInput({required Widget child}) {
-    return Padding(padding: const EdgeInsets.only(bottom: 18.0), child: child);
+  
+  Widget _buildAgeField() {
+    return TextFormField(
+      controller: _ageCtrl,
+      keyboardType: TextInputType.number,
+      decoration: const InputDecoration(
+        labelText: "Age",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+        ),
+      ),
+      validator: (v) {
+        final n = int.tryParse(v ?? "");
+        if (n == null || n <= 0) return "Enter a valid age";
+        return null;
+      },
+    );
+  }
+
+  Widget _buildWeightField() {
+    return TextFormField(
+      controller: _weightLbsCtrl,
+      keyboardType: TextInputType.number,
+      decoration: const InputDecoration(
+        labelText: "Weight (lbs)",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+        ),
+      ),
+      validator: (v) {
+        final n = double.tryParse(v ?? "");
+        if (n == null || n <= 0) return "Enter a valid weight";
+        return null;
+      },
+    );
+  }
+
+  
+  Widget _buildHeightFields() {
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            controller: _feetCtrl,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              labelText: "Feet",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+            ),
+            validator: (v) {
+              final n = int.tryParse(v ?? "");
+              if (n == null || n <= 0) return "Invalid";
+              return null;
+            },
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: TextFormField(
+            controller: _inchesCtrl,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              labelText: "Inches",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+            ),
+            validator: (v) {
+              final n = int.tryParse(v ?? "");
+              if (n == null || n < 0 || n > 11) return "0–11";
+              return null;
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildGenderDropdown(ThemeData theme) {
+    return DropdownButtonFormField<String>(
+      decoration: _dropdownDecoration(theme, "Gender"),
+      items: Db.sex
+          .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+          .toList(),
+      onChanged: (v) => setState(() => _selectedSex = v),
+      validator: (v) => v == null ? "Required" : null,
+    );
+  }
+
+  Widget _buildActivityDropdown(ThemeData theme) {
+    return DropdownButtonFormField<String>(
+      decoration: _dropdownDecoration(theme, "Activity Level"),
+      items: Db.activityLevels
+          .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+          .toList(),
+      onChanged: (v) => setState(() => _selectedActivity = v),
+      validator: (v) => v == null ? "Required" : null,
+    );
+  }
+
+  Widget _buildGoalDropdown(ThemeData theme) {
+    return DropdownButtonFormField<String>(
+      decoration: _dropdownDecoration(theme, "Goal"),
+      items: Db.goals
+          .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+          .toList(),
+      onChanged: (v) => setState(() => _selectedGoal = v),
+      validator: (v) => v == null ? "Required" : null,
+    );
+  }
+
+
+
+  Widget _buildSubmitButton(ThemeData theme) {
+    return SizedBox(
+      width: double.infinity,
+      height: 50,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: theme.colorScheme.secondary.withAlpha(31),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+        onPressed: _submit,
+        child: Text(
+          "Submit",
+          style: theme.textTheme.bodyMedium?.copyWith(fontSize: 18),
+        ),
+      ),
+    );
+  }
+
+
+
+  Future<void> _submit() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    final user = await SecureStorage.getUser();
+    if (user == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("User not logged in")));
+      return;
+    }
+
+    final details = PersonalDetailsInput(
+      age: int.parse(_ageCtrl.text),
+      weightLbs: double.parse(_weightLbsCtrl.text),
+      heightFeet: int.parse(_feetCtrl.text),
+      heightInches: int.parse(_inchesCtrl.text),
+      gender: _selectedSex!,
+      activityLevel: _selectedActivity!,
+      goal: _selectedGoal!,
+    );
+
+    final result = await PersonalDetailsAPI.savePersonalDetails(
+      user.id,
+      details,
+    );
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(result["message"])));
+  }
+
+ 
+
+  Widget _input(Widget child) =>
+      Padding(padding: const EdgeInsets.only(bottom: 18.0), child: child);
+
+  InputDecoration _dropdownDecoration(ThemeData theme, String label) {
+    return InputDecoration(
+      labelText: label,
+      labelStyle: theme.textTheme.bodyMedium,
+      border: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+      ),
+    );
   }
 }
