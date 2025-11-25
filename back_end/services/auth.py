@@ -79,3 +79,22 @@ async def get_current_user(token: str = Depends(oauth2_scheme),db: AsyncSession 
 
 async def logout_user():
     return {"message": "Logout successful"}
+async def reset_password(data: dict, db: AsyncSession):
+    email = data.get("email")
+    new_password = data.get("new_password")
+
+    if not email or not new_password:
+        return {"success": False, "message": "Missing email or password"}
+
+    result = await db.execute(select(User).where(User.email == email))
+    user = result.scalars().first()
+
+    if not user:
+        return {"success": False, "message": "User not found"}
+
+    user.password = get_password_hash(new_password)
+    await db.commit()
+
+    return {"success": True, "message": "Password reset successful"}
+
+   

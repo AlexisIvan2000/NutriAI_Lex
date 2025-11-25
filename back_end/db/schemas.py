@@ -23,6 +23,8 @@ class UserBase(BaseModel):
    class Config:
       orm_mode = True
 
+
+
 # Personal Details Schemas
 class PersonalDetailsCreate(BaseModel):
    age: int
