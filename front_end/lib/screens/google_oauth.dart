@@ -30,20 +30,24 @@ class _GoogleOAuthScreenState extends State<GoogleOAuthScreen> {
               final token = args[0];
 
               final user = await GoogleAuthService.fetchUserWithToken(token);
-
-              if (user != null) {
+              if (context.mounted){
+                if (user != null) {
                 await AuthService.instance.loginWithGoogle(token, user);
 
-                Navigator.pushAndRemoveUntil(
+               if(context.mounted){
+                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (_) => const UserDataScreen()),
                   (route) => false,
                 );
+               }
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("Google sign-in failed")),
                 );
               }
+              }
+             
             },
           );
         },

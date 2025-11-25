@@ -62,12 +62,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: ElevatedButton(
                   onPressed: () async {
                     await AuthService.instance.logout();
-                    Navigator.of(context).pushAndRemoveUntil(
+                    if (context.mounted){
+                      Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (_) => const SigninScreen(),
                       ),
                       (route) => false,
                     );
+                    }
+                    
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.onSurface.withAlpha(100),

@@ -96,14 +96,17 @@ class _SigninFormState extends State<SigninForm> {
                     _emailController.text.trim(),
                     _passwordController.text.trim(),
                   );
-
-                  if (ok) {
+                  if (context.mounted){
+                    if (ok) {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const UserDataScreen(),
                       ),
                       (route) => false,
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Signed in successfully")),
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -112,6 +115,8 @@ class _SigninFormState extends State<SigninForm> {
                       ),
                     );
                   }
+                  }
+                  
                 }
               },
               style: ElevatedButton.styleFrom(

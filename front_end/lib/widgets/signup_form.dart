@@ -165,8 +165,8 @@ class _SignupFormState  extends State<SignupForm> {
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
-
-        if (result["success"]) {
+        if (context.mounted) {
+          if (result["success"]) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Account created successfully!")),
           );
@@ -179,6 +179,8 @@ class _SignupFormState  extends State<SignupForm> {
             SnackBar(content: Text(result["message"])),
           );
         }
+        }
+        
       }
     },
     style: ElevatedButton.styleFrom(
