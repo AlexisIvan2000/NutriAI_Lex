@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/screens/signin.dart';
+import 'package:front_end/services/auth_service.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -152,31 +154,50 @@ class _SignupFormState  extends State<SignupForm> {
           ),
           const SizedBox(height: 24.0),
           SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  // Process data
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                backgroundColor: Theme.of(
-                  context,
-                ).colorScheme.secondary.withAlpha(31),
-              ),
-              child: Text(
-                'Sign up',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Colors.black,
-                  fontSize: 18,
-                ),
-              ),
-            ),
+  width: double.infinity,
+  height: 50,
+  child: ElevatedButton(
+    onPressed: () async {
+      if (_formKey.currentState!.validate()) {
+        final result = await AuthService.instance.register(
+          firstName: _firstNAmeController.text.trim(),
+          lastName: _lastNameController.text.trim(),
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+
+        if (result["success"]) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Account created successfully!")),
+          );
+
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (_) => const SigninScreen()),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(result["message"])),
+          );
+        }
+      }
+    },
+    style: ElevatedButton.styleFrom(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      backgroundColor:
+          Theme.of(context).colorScheme.secondary.withAlpha(31),
+    ),
+    child: Text(
+      'Sign up',
+      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            color: Colors.black,
+            fontSize: 18,
           ),
+    ),
+  ),
+),
+
           const SizedBox(height: 16.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

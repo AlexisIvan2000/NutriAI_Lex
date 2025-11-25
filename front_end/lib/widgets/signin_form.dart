@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/screens/signup.dart';
 import 'package:front_end/screens/user_data.dart';
-
+import 'package:front_end/services/auth_service.dart';
+import 'package:front_end/screens/google_oauth.dart';
 
 class SigninForm extends StatefulWidget {
   const SigninForm({super.key});
@@ -39,7 +40,6 @@ class _SigninFormState extends State<SigninForm> {
               labelText: 'Email',
               prefixIcon: Icon(Icons.email),
             ),
-            keyboardType: TextInputType.emailAddress,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter your email';
@@ -50,7 +50,9 @@ class _SigninFormState extends State<SigninForm> {
               return null;
             },
           ),
+
           const SizedBox(height: 16.0),
+
           TextFormField(
             controller: _passwordController,
             decoration: InputDecoration(
@@ -81,38 +83,36 @@ class _SigninFormState extends State<SigninForm> {
               return null;
             },
           ),
-          const SizedBox(height: 5.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextButton(
-                onPressed: () {
-                  //  Implement forgot password functionality
-                },
-                child: Text(
-                  'Forgot Password?',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium!.copyWith(fontSize: 18),
-                ),
-              ),
-            ],
-          ),
+
           const SizedBox(height: 30.0),
+
           SizedBox(
             width: double.infinity,
             height: 50,
             child: ElevatedButton(
-              onPressed: () {
-                // if (_formKey.currentState!.validate()) {
-                //   // Process data
-                // }
-                  Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => const UserDataScreen(),
-                  ),
-                  (route) => false,
-                );
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  final ok = await AuthService.instance.login(
+                    _emailController.text.trim(),
+                    _passwordController.text.trim(),
+                  );
+
+                  if (ok) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const UserDataScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Invalid email or password"),
+                      ),
+                    );
+                  }
+                }
               },
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -131,14 +131,18 @@ class _SigninFormState extends State<SigninForm> {
               ),
             ),
           ),
+
           const SizedBox(height: 16.0),
+
           SizedBox(
             width: double.infinity,
             height: 50,
             child: ElevatedButton(
               onPressed: () {
-                // Implement Google Sign-In functionality
-              
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const GoogleOAuthScreen()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -171,7 +175,9 @@ class _SigninFormState extends State<SigninForm> {
               ),
             ),
           ),
+
           const SizedBox(height: 20.0),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -184,9 +190,7 @@ class _SigninFormState extends State<SigninForm> {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const SignupScreen(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const SignupScreen()),
                   );
                 },
                 child: Text(
