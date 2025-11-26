@@ -18,8 +18,9 @@ class User(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
-    personal_details = relationship("PersonalDetails", back_populates="user", uselist=False)
-    calorie_intakes = relationship("CalorieIntake", back_populates="user", cascade="all, delete")
+    personal_details = relationship("PersonalDetails", back_populates="user", uselist=False, cascade="all, delete, delete-orphan")
+    calorie_intakes = relationship("CalorieIntake", back_populates="user", cascade="all, delete, delete-orphan")
+    nutrition_plans = relationship("NutritionPlan", back_populates="user", cascade="all, delete, delete-orphan")
 
 class PersonalDetails(Base):
   __tablename__ = 'personal_details'
@@ -55,5 +56,5 @@ class NutritionPlan(Base):
   plan_text = Column(String, nullable=False)
   created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-  user = relationship("User")
+  user = relationship("User", back_populates="nutrition_plans")
   

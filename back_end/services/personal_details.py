@@ -19,3 +19,10 @@ async def save_personal_details(data, db: AsyncSession):
     await db.refresh(details)
 
     return details
+
+async def get_personal_details(user_id: int, db: AsyncSession):
+    result = await db.execute(
+        select(PersonalDetails).where(PersonalDetails.user_id == user_id)
+    )
+    details = result.scalars().first()
+    return details

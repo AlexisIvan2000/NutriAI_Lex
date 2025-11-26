@@ -2,7 +2,12 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from services import auth
-from services.auth import register_user, login_user, get_current_user, logout_user, reset_password
+from services.auth import(
+    register_user, login_user,
+    get_current_user, logout_user, 
+    reset_password, delete_user
+)
+
 from db.database import get_db
 from db.schemas import UserCreate, UserLogin
 
@@ -35,3 +40,7 @@ async def logout():
 @router.post("/reset-password")
 async def reset_password_route(data: dict, db: AsyncSession = Depends(get_db)):
     return await reset_password(data, db)
+
+@router.delete("/delete-account")
+async def delete_account(current_user = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+    return await delete_user(current_user, db)

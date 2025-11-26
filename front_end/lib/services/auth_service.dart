@@ -75,4 +75,14 @@ class AuthService extends ChangeNotifier {
   }) async {
     return await AuthAPI.resetPassword(email: email, newPassword: newPassword);
   }
+
+  Future<Map<String, dynamic>> deleteAccount() async {
+    final result = await AuthAPI.deleteAccount();
+
+    if (result["success"] == true) {
+      await logout();
+    }
+
+    return result;
+  }
 }

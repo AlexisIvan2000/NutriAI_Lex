@@ -79,6 +79,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme),db: AsyncSession 
 
 async def logout_user():
     return {"message": "Logout successful"}
+
 async def reset_password(data: dict, db: AsyncSession):
     email = data.get("email")
     new_password = data.get("new_password")
@@ -97,4 +98,7 @@ async def reset_password(data: dict, db: AsyncSession):
 
     return {"success": True, "message": "Password reset successful"}
 
-   
+async def delete_user(current_user: User, db: AsyncSession):
+    await db.delete(current_user)
+    await db.commit()
+    return {"message": "User account deleted successfully"}

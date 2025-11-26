@@ -87,6 +87,26 @@ class AuthAPI {
     };
   }
 
+  static Future<Map<String, dynamic>> deleteAccount() async {
+    final token = await SecureStorage.getToken();
+
+    if (token == null) {
+      return {"success": false, "message": "User not logged in"};
+    }
+
+    final response = await http.delete(
+      Uri.parse("$baseUrl/auth/delete-account"),
+      headers: {"Authorization": "Bearer $token"},
+    );
+
+    final data = jsonDecode(response.body);
+
+    return {
+      "success": response.statusCode == 200,
+      "message": data["message"] ?? data["detail"] ?? "Unknown error",
+    };
+  }
+
   static Future<void> logout() async {
     await SecureStorage.clearAll();
   }

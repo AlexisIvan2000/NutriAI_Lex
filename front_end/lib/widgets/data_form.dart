@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/data/db.dart';
 import 'package:front_end/models/datas.dart';
+import 'package:front_end/screens/dashboard.dart';
 import 'package:front_end/services/personal_details_api.dart';
 import 'package:front_end/utils/secure_storage.dart';
 
@@ -191,7 +192,6 @@ class _DataFormState extends State<DataForm> {
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
-
     final user = await SecureStorage.getUser();
     if (user == null) {
       ScaffoldMessenger.of(
@@ -220,6 +220,10 @@ class _DataFormState extends State<DataForm> {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(result["message"])));
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const DashboardScreen()), 
+      (route) => false,
+    );
   }
 
  

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/services/auth_api.dart';
 import 'package:front_end/widgets/dashboard/navigation.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -10,6 +11,26 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   final _searchController = TextEditingController();
+  String username = "User";
+  
+  @override
+  void initState(){
+    super.initState();
+    loadUser();
+  }
+  void loadUser() async {
+    final profile = await AuthAPI.getCurrentUser();
+    if (profile != null) {
+      setState(() {
+        username = profile.firstName; 
+      });
+
+    } else {
+      setState(() {
+        username = "User";
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +44,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             const SizedBox(width: 8),
             Text(
-              'Welcome, Alexis!',
+              'Welcome, $username !',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
