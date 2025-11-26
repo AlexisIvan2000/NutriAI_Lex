@@ -38,6 +38,16 @@ class PersonalDetailsCreate(BaseModel):
    class Config:
       orm_mode = True
 
+# Nutrition Schemas
+class CalorieIntakeCreate(BaseModel):
+   user_id: int
+   calorie_amount: int
+   carbs: float
+   proteins: float
+   fats: float
+
+   class Config:
+      orm_mode = True
 
 class NutritionInput(BaseModel):
    age: int

@@ -1,4 +1,7 @@
 from db.schemas import NutritionInput, NutritionOutput
+from db.models import CalorieIntake
+from sqlalchemy.ext.asyncio import AsyncSession
+
 
 def calculate_bmr(input: NutritionInput) -> float:
     if input.gender.lower() == 'male':
