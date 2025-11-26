@@ -47,12 +47,17 @@ class NutritionInput(BaseModel):
    activity_level: str
    goal: str
 
+
 class NutritionOutput(BaseModel):
-   dej:float
-   calories:float
-   proteins:float
-   fats:float
-   carbs:float
+  bmr: float
+  tdee: float
+  proteins: float
+  fats: float
+  carbs: float
+
+  class Config:
+      orm_mode = True
+  
 
 # AI Nutrition Plan Response Schema
 class AINutritionPlanResponse(BaseModel):
