@@ -15,6 +15,8 @@ class Db {
     'Mass Gain',
   ];
   static const List<String> allergies = [
+    'None',
+    'Gluten',
     'Peanuts',
     'Tree Nuts',
     'Sesame',
