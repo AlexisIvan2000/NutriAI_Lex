@@ -49,4 +49,14 @@ class PersonalDetailsAPI {
       "An unexpected error occurred",
     };
   }
+
+  static Future<Map<String, dynamic>> getPersonalDetails(int userId) async {
+    final token = await SecureStorage.getToken();
+    final response = await http.get(
+      Uri.parse("$baseUrl/personal-details/get/$userId"),
+      headers: {"Authorization": "Bearer $token"},
+    );
+    final resData = jsonDecode(response.body);
+    return resData;
+  }
 }

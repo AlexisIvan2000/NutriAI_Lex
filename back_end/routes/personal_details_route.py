@@ -22,7 +22,7 @@ async def save_route(
         "data": saved
     }
 
-@router.get("/{user_id}")
+@router.get("/get/{user_id}")
 async def get_route(
     user_id: int,
     db: AsyncSession = Depends(get_db)
