@@ -38,22 +38,22 @@ def calculate_nutrition(input: NutritionInput) -> NutritionOutput:
     tdee = tdee_base + goal_adjustment(input.goal)
 
     if input.goal.lower() == 'lose fat':
-        proteins = (0.35 * tdee) / 4
-        carbs = (0.40 * tdee) / 4
-        fats = (0.25 * tdee) / 9
+        proteins = round((0.35 * tdee) / 4)
+        carbs = round( (0.40 * tdee) / 4)
+        fats = round((0.25 * tdee) / 9)
     elif input.goal.lower() == 'mass gain':
-        proteins = (0.50 * tdee) / 4
-        carbs = (0.30 * tdee) / 4
-        fats = (0.20 * tdee) / 9
+        proteins = round((0.50 * tdee) / 4) 
+        carbs = round((0.30 * tdee) / 4)
+        fats = round((0.20 * tdee) / 9)
     else: 
-        proteins = (0.30 * tdee) / 4
-        carbs = (0.45 * tdee) / 4
-        fats = (0.25 * tdee) / 9
+        proteins = round((0.30 * tdee) / 4)
+        carbs = round((0.45 * tdee) / 4)
+        fats = round((0.25 * tdee) / 9)
 
     return NutritionOutput(
         bmr=round(bmr, 2),
         tdee=round(tdee, 2),
-        proteins=round(proteins, 2),
-        fats=round(fats, 2),
-        carbs=round(carbs, 2)
+        proteins= proteins,
+        fats= fats,
+        carbs= carbs
     )

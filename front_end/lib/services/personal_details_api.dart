@@ -59,4 +59,19 @@ class PersonalDetailsAPI {
     final resData = jsonDecode(response.body);
     return resData;
   }
+
+  static Future<Map<String, dynamic>> generateCalories(int userId, PersonalDetailsInput details) async {
+  final token = await SecureStorage.getToken();
+  final response = await http.post(
+    Uri.parse("$baseUrl/calories/generate/$userId"),
+    headers: {
+      "Authorization": "Bearer $token",
+      "Content-Type": "application/json"
+    },
+    body: jsonEncode(details.toJson(userId)),
+  );
+
+  return jsonDecode(response.body);
+}
+
 }

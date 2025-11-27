@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/services/auth_api.dart';
 import 'package:front_end/widgets/dashboard/navigation.dart';
+import 'package:front_end/widgets/dashboard/nutrition.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -65,8 +66,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               hintText: 'Search for recipes, ingredients, or diets',
               leading: const Icon(Icons.search),
             ),
-            const SizedBox(height: 20),
-            //  Other dashboard content goes here(macros)
+            const SizedBox(height: 30),
+           Nutrition(),
             const SizedBox(height: 20),
             Align(
               alignment: Alignment.centerLeft,

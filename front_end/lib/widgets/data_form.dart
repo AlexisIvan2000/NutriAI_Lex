@@ -210,10 +210,8 @@ class _DataFormState extends State<DataForm> {
       goal: _selectedGoal!,
     );
 
-    final result = await PersonalDetailsAPI.savePersonalDetails(
-      user.id,
-      details,
-    );
+    final result = await PersonalDetailsAPI.savePersonalDetails(user.id,details);
+    await PersonalDetailsAPI.generateCalories(user.id, details);
 
     if (!mounted) return;
 

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime,ForeignKey, func
+from sqlalchemy import Column, Integer, String,Float, DateTime,ForeignKey, func
 from sqlalchemy.orm import relationship
 from .database import Base
 
@@ -42,9 +42,9 @@ class CalorieIntake(Base):
   id = Column(Integer, primary_key=True, index=True)
   user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
   calorie_amount = Column(Integer, nullable=False)
-  carbs = Column(Float, nullable=True)
-  proteins = Column(Float, nullable=True)
-  fats = Column(Float, nullable=True)
+  carbs = Column(Integer, nullable=True)
+  proteins = Column(Integer, nullable=True)
+  fats = Column(Integer, nullable=True)
 
   user = relationship("User", back_populates="calorie_intakes")
 

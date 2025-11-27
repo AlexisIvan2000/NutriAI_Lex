@@ -61,9 +61,9 @@ class NutritionInput(BaseModel):
 class NutritionOutput(BaseModel):
   bmr: float
   tdee: float
-  proteins: float
-  fats: float
-  carbs: float
+  proteins: int
+  fats: int
+  carbs: int
 
   class Config:
       orm_mode = True
