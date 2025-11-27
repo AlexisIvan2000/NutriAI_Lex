@@ -21,6 +21,7 @@ class User(Base):
     personal_details = relationship("PersonalDetails", back_populates="user", uselist=False, cascade="all, delete, delete-orphan")
     calorie_intakes = relationship("CalorieIntake", back_populates="user", cascade="all, delete, delete-orphan")
     nutrition_plans = relationship("NutritionPlan", back_populates="user", cascade="all, delete, delete-orphan")
+    diet_allergies = relationship("DietAllergy", back_populates="user", cascade="all, delete, delete-orphan")
 
 class PersonalDetails(Base):
   __tablename__ = 'personal_details'
@@ -57,4 +58,15 @@ class NutritionPlan(Base):
   created_at = Column(DateTime(timezone=True), server_default=func.now())
 
   user = relationship("User", back_populates="nutrition_plans")
+
+
+class DietAllergy(Base):
+    __tablename__ = "diet_allergies"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    diet = Column(String(100), nullable=True)        
+    allergies = Column(String(500), nullable=True)   
+    user = relationship("User", back_populates="diet_allergies")
+
   

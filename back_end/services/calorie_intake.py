@@ -11,6 +11,6 @@ async def save_calorie_intake(user_id: int, data, db: AsyncSession):
     )
 
     db.add(record)
-    await db.commit()
-    await db.refresh(record)
+    await db.commit()    
     return record
+

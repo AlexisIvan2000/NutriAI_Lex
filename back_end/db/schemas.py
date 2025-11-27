@@ -69,6 +69,21 @@ class NutritionOutput(BaseModel):
       orm_mode = True
   
 
+class DietAllergyInput(BaseModel):
+    diet: str | None
+    allergies: str | None
+
+    class Config:
+        orm_mode = True
+
+
+class DietAllergyOutput(BaseModel):
+    diet: str | None
+    allergies: str | None
+
+    class Config:
+        orm_mode = True
+
 # AI Nutrition Plan Response Schema
 class AINutritionPlanResponse(BaseModel):
    plan_text: str
