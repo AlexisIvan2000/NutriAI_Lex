@@ -20,4 +20,34 @@ class NutritionAPI {
 
     return null;
   }
+
+  static Future<Map<String, dynamic>?> updateCalorieIntake({
+    required int calories,
+    required int proteins,
+    required int carbs,
+    required int fats,
+  }) async {
+    final token = await SecureStorage.getToken();
+    if (token == null) return {"success": false, "message": "User not logged in"};
+
+    final res = await http.post(
+      Uri.parse("$baseUrl/nutrition/update"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      },
+      body: jsonEncode({
+        "calories": calories,
+        "proteins": proteins,
+        "carbs": carbs,
+        "fats": fats,
+      }),
+    );
+
+    final data = jsonDecode(res.body);
+    return {
+      "success": res.statusCode == 200,
+      "message": data["message"] ?? "Unknown error",
+    };
+  }
 }

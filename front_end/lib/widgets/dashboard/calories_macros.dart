@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/services/nutrition_api.dart';
+import 'package:front_end/widgets/reset/adjust_calories_dialog.dart';
 
 class CaloriesMacros extends StatefulWidget {
   const CaloriesMacros({super.key});
@@ -80,10 +81,10 @@ class _CaloriesMacrosState extends State<CaloriesMacros> {
               children: [
                 TextButton(
                   onPressed: () {
-                    // future: edit calories or target
+                    showAdjustCaloriesDialog(context, summary!, loadSummary);
                   },
                   child: const Text("Adjust"),
-                )
+                ),
               ],
             ),
           ],

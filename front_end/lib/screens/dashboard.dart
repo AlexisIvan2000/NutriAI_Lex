@@ -66,7 +66,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
               hintText: 'Search for recipes, ingredients, or diets',
               leading: const Icon(Icons.search),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
+             Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Calories & macros', style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              )),
+            ),
+            const SizedBox(height: 20),
            Nutrition(),
             const SizedBox(height: 20),
             Align(
