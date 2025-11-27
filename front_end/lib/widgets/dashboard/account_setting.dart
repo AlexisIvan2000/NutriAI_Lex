@@ -130,7 +130,7 @@ void showDeleteAccountDialog(BuildContext context) {
             child: const Text('Delete'),
             onPressed: () async {
               final result = await AuthService.instance.deleteAccount();
-
+             if (!context.mounted) return;
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(result["message"])));

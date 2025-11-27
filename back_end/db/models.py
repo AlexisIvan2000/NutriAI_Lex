@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String,Float, DateTime,ForeignKey, func
+from sqlalchemy import Column, Integer,Text, String,Float, DateTime,ForeignKey, func
 from sqlalchemy.orm import relationship
 from .database import Base
 
@@ -61,12 +61,10 @@ class NutritionPlan(Base):
 
 
 class DietAllergy(Base):
-    __tablename__ = "diet_allergies"
-
+    __tablename__ = "diet_allergy"
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    diet = Column(String(100), nullable=True)        
-    allergies = Column(String(500), nullable=True)   
+    diet = Column(String(50), nullable=False, default="No Preference")
+    allergies = Column(Text, nullable=False, default="[]") 
     user = relationship("User", back_populates="diet_allergies")
-
   

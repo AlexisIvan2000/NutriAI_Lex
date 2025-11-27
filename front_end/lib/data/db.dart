@@ -36,6 +36,7 @@ class Db {
     'Poppy seeds',
   ];
   static const List<String> diets = [
+    'No Preference',
     'Vegetarian',
     'Vegan',
     'Pescatarian',

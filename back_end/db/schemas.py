@@ -70,16 +70,16 @@ class NutritionOutput(BaseModel):
   
 
 class DietAllergyInput(BaseModel):
-    diet: str | None
-    allergies: str | None
+    diet: str 
+    allergies: str 
 
     class Config:
         orm_mode = True
 
 
 class DietAllergyOutput(BaseModel):
-    diet: str | None
-    allergies: str | None
+    diet: str 
+    allergies: str 
 
     class Config:
         orm_mode = True

@@ -194,6 +194,7 @@ class _DataFormState extends State<DataForm> {
     if (!_formKey.currentState!.validate()) return;
     final user = await SecureStorage.getUser();
     if (user == null) {
+      if (!mounted) return;
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text("User not logged in")));

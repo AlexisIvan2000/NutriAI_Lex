@@ -85,7 +85,7 @@ void showAdjustCaloriesDialog(
                 carbs: int.parse(carbsCtrl.text),
                 fats: int.parse(fatsCtrl.text),
               );
-
+              if (!context.mounted) return;
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(result?["message"] ?? "")),
               );

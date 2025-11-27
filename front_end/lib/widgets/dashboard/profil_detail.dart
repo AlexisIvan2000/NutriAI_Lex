@@ -79,7 +79,7 @@ class _ProfilDetailState extends State<ProfilDetail> {
             _row(context, "Age", "$age years"),
             _row(context, "Current Weight", weightDisplay),
             _row(context, "Height", heightDisplay),
-            _row(context, "Sex", "$gender"),
+            _row(context, "Gender", "$gender"),
             _row(context, "Activity Level", "$activity"),
             _row(context, "Goal", "$goal"),
 

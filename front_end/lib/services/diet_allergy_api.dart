@@ -3,11 +3,16 @@ import 'package:http/http.dart' as http;
 import 'package:front_end/utils/secure_storage.dart';
 
 class DietAllergyAPI {
-  static const baseUrl = "http://10.0.2.2:8000";
+  static const String baseUrl = "http://10.0.2.2:8000";
 
-  static Future<Map<String, dynamic>?> save(Map<String, dynamic> data) async {
+  static Future<Map<String, dynamic>> save({
+    required String diet,
+    required List<String> allergies,
+  }) async {
     final token = await SecureStorage.getToken();
-    if (token == null) return null;
+    if (token == null) {
+      return {"success": false, "message": "User not logged in"};
+    }
 
     final res = await http.post(
       Uri.parse("$baseUrl/diet-allergy/save"),
@@ -15,9 +20,16 @@ class DietAllergyAPI {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json",
       },
-      body: jsonEncode(data),
+      body: jsonEncode({
+        "diet": diet,
+        "allergies": allergies,
+      }),
     );
-    return jsonDecode(res.body);
+
+    final data = jsonDecode(res.body);
+    return data is Map<String, dynamic>
+        ? data
+        : {"success": false, "message": "Unexpected server response"};
   }
 
   static Future<Map<String, dynamic>?> get() async {
@@ -28,6 +40,8 @@ class DietAllergyAPI {
       Uri.parse("$baseUrl/diet-allergy/get"),
       headers: {"Authorization": "Bearer $token"},
     );
-    return jsonDecode(res.body);
+
+    final data = jsonDecode(res.body);
+    return data is Map<String, dynamic> ? data : null;
   }
 }
