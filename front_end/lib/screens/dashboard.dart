@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/main.dart';
 import 'package:front_end/services/auth_api.dart';
 import 'package:front_end/widgets/dashboard/navigation.dart';
 import 'package:front_end/widgets/dashboard/nutrition.dart';
+import 'package:front_end/widgets/dashboard/recipe_search_bar.dart';
+import 'package:front_end/widgets/dashboard/tips.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -11,7 +14,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final _searchController = TextEditingController();
+
   String username = "User";
   
   @override
@@ -36,6 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: colorScheme.surface,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -60,12 +64,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SearchBar(
-              backgroundColor: WidgetStateProperty.all(Colors.white),
-              controller: _searchController,
-              hintText: 'Search for recipes, ingredients, or diets',
-              leading: const Icon(Icons.search),
-            ),
+            RecipeSearchBar(),
             const SizedBox(height: 20),
              Align(
               alignment: Alignment.centerLeft,
@@ -84,6 +83,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 fontWeight: FontWeight.w600,
               )),
             ),
+            const SizedBox(height: 20),
+            const Tips(),
           ],
         ),
       ),

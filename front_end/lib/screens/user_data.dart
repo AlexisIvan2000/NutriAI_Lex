@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/main.dart';
 import 'package:front_end/widgets/data_form.dart';
 import 'package:front_end/screens/dashboard.dart';
 
@@ -9,6 +10,7 @@ class UserDataScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: colorScheme.surface, 
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

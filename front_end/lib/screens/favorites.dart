@@ -22,6 +22,7 @@ class _PlansScreenState extends State<PlansScreen> {
 
   Future<void> loadPlan() async {
     setState(() => loading = true);
+
     final res = await AiNutritionAPI.generatePlan();
 
     if (res["success"] == true) {
@@ -52,22 +53,46 @@ class _PlansScreenState extends State<PlansScreen> {
     );
   }
 
-  
   Widget _buildPlan() {
-    final rawWeek = plan?["weekly_nutrition_plan"];
+    // Accept ALL 3 backend versions
+    final rawWeek = plan?["weekly_nutrition_plan"] ??
+        plan?["weeklyNutritionPlan"] ??
+        plan?["nutrition_plan"];
 
     if (rawWeek == null || rawWeek is! Map<String, dynamic>) {
       return const Center(
-          child: Text("Invalid plan format from server.",
-              style: TextStyle(color: Colors.red)));
+          child: Text(
+        "Invalid plan format from server.",
+        style: TextStyle(color: Colors.red),
+      ));
     }
 
-  
+    // Normalize into a list of day objects
     final List<Map<String, dynamic>> days = rawWeek.entries.map((entry) {
-      return {
-        "day": entry.key,
-        "meals": entry.value["meals"] ?? {},
-      };
+      final dayName = entry.key;
+      final dayData = entry.value;
+
+      // Accept both formats:
+      // A → "meals": [ {...}, {...} ]
+      // B → "meals": {"Breakfast": {...}, ...}
+      final rawMeals = dayData["meals"];
+
+      List<Map<String, dynamic>> normalizedMeals = [];
+
+      if (rawMeals is List) {
+        // Already list format
+        normalizedMeals = rawMeals.cast<Map<String, dynamic>>();
+      } else if (rawMeals is Map<String, dynamic>) {
+        // Convert map → list
+        rawMeals.forEach((mealName, value) {
+          normalizedMeals.add({
+            "meal": mealName,
+            "ingredients": value["ingredients"] ?? []
+          });
+        });
+      }
+
+      return {"day": dayName, "meals": normalizedMeals};
     }).toList();
 
     return Column(
@@ -108,7 +133,6 @@ class _PlansScreenState extends State<PlansScreen> {
     );
   }
 
-
   Widget _buildDayCard(Map<String, dynamic> day) {
     final meals = day["meals"] as List<dynamic>? ?? [];
 
@@ -128,7 +152,6 @@ class _PlansScreenState extends State<PlansScreen> {
                     .copyWith(fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
 
-           
             ...meals.map((meal) => _buildMeal(meal)),
           ],
         ),
@@ -136,9 +159,6 @@ class _PlansScreenState extends State<PlansScreen> {
     );
   }
 
-  /// --------------------------
-  /// DISPLAY A MEAL + INGREDIENTS
-  /// --------------------------
   Widget _buildMeal(dynamic meal) {
     final String title = meal["meal"] ?? "Meal";
     final ingredients = meal["ingredients"] as List<dynamic>? ?? [];
@@ -148,17 +168,17 @@ class _PlansScreenState extends State<PlansScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title,
-              style:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-
+          Text(
+            title,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
           const SizedBox(height: 6),
 
           ...ingredients.map(
             (ing) => Padding(
               padding: const EdgeInsets.only(left: 16, bottom: 4),
               child: Text(
-                "- ${ing["name"]} (${ing["grams"]}g)",
+                "- ${ing["item"] ?? ing["name"]} (${ing["grams"]}g)",
                 style: const TextStyle(fontSize: 14),
               ),
             ),
