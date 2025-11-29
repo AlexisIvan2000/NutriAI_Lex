@@ -24,7 +24,7 @@ class _NavigateBarState extends State<NavigateBar> {
         );
       } else if (_selectedIndex == 1) {
         Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (_) => const FavoritesScreen()),
+          MaterialPageRoute(builder: (_) => const PlansScreen()),
           (Route<dynamic> route) => false,
         );
       } else if (_selectedIndex == 2) {
@@ -51,7 +51,7 @@ class _NavigateBarState extends State<NavigateBar> {
       onTap: _onItemTapped,
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favorites'),
+        BottomNavigationBarItem(icon: Icon(Icons.my_library_books_rounded), label: 'Plans'),
         BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
       ],

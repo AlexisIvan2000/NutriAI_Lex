@@ -15,6 +15,9 @@ dependencies:
   google_fonts: ^6.3.2
   http: ^1.6.0
  
+  path_provider: ^2.1.5
+  pdf: ^3.11.3
+  printing: ^5.14.2
   url_launcher: ^6.3.2
 
 dev_dependencies:
