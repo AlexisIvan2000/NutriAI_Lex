@@ -5,6 +5,7 @@ from routes.personal_details_route import router as personal_details_route
 from routes.nutrition_route import router as nutrition_route
 from routes.calorie_intake_route import router as calorie_intake_route
 from routes.diet_allergy_route import router as diet_allergy_route
+from routes.ai_route import router as ai_route
 app = FastAPI()
 
 app.include_router(auth_route)
@@ -13,6 +14,8 @@ app.include_router(personal_details_route)
 app.include_router(nutrition_route)
 app.include_router(calorie_intake_route)
 app.include_router(diet_allergy_route)
+app.include_router(ai_route)
+
 @app.get("/")
 async def root():
     return {"message": "Welcome to the NutriAI Lex API"}

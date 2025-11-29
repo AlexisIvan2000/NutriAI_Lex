@@ -5,3 +5,4 @@ Pytest
 FastAPI
 Passlib[argon2]
 Asyncpg
+Openai
